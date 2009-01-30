@@ -1,0 +1,37 @@
+<h1>Gaestbook</h1>
+
+<p>
+  <img src="{{ user.pic_small }}" alt="{{ user.name }}"/>
+  Hello {{ user.name }} and welcome to gaestbook.
+</p>
+
+<h2>Post entry</h2>
+
+<form action="sign" method="post">
+  <div><textarea name="content" rows="3" cols="60"></textarea></div>
+  <div><input type="submit" value="Sign Guestbook"></div>
+</form>
+
+<h2>Posted entries:</h2>
+
+{% ifnotequal len(greetings) 0 %}
+  {% for greeting in greetings %}
+  <div class="greeting">
+    <p class="author">
+    {% if greeting.author %}
+      {% if greeting.author.pic_square %}
+      <img src="{{ greeting.author.pic_square }}" alt="{{ greeting.author.name }}"/>
+      {% endif %}
+      <strong>{{ greeting.author.name }}</strong> wrote:
+    {% else %}
+      Unknown author wrote:
+    {% endif %}
+    </p>
+    <p class="content">
+      {{ greeting.content|escape }}
+    </blockquote>
+  </div>
+  {% endfor %}
+{% else %}
+  <p>Whoa, you will be the first to sign guestbook!</p>
+{% endifnotequal %}
